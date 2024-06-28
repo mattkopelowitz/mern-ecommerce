@@ -13,6 +13,7 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <div>
+          <Route path="/" component={Login} exact/>
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/products" component={ProductList} />
@@ -20,7 +21,7 @@ const App = () => {
           <Route path="/cart" component={Cart} />
         </div>
       </Router>
-    </Provider>
+    </Provider> 
   );
 };
 
