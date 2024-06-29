@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 //import { useDispatch, useSelector } from "react-redux";
-//import { login } from "../../redux/actions/userActions";
+import { login } from "./actions/userActions";
 
 const Login = ({ history }) => {
     const [email, setEmail] = useState("");
@@ -12,7 +12,7 @@ const Login = ({ history }) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        // dispatch(login(email, password));
+        dispatch(login(email, password));
     };
 
     return (
