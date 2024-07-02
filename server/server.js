@@ -3,6 +3,7 @@ const connectDB = require("./config/db");
 const dotenv = require("dotenv");
 const userRoutes = require("./routes/UserRoutes");
 const productRoutes = require("./routes/ProductRoutes");
+const cors = require("cors")
 
 // Load environment variables from .env file
 dotenv.config();
@@ -12,6 +13,7 @@ connectDB();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use("/api/users", userRoutes);

@@ -1,25 +1,32 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { loginAction } from "./actions/userActions";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const submitHandler = (e) => {
+    const login = async (e) => {
         e.preventDefault();
-        dispatch(loginAction(email, password));
-        navigate("/products");
+        try {
+            const data = await axios.post("http://localhost:5000/api/users/login", { email, password });
+            dispatch({ type: "USER_LOGIN_SUCCESS", payload: data });
+            localStorage.setItem("user", JSON.stringify({email: data.data.email}));
+            navigate("/products");
+        } catch (err) {
+            console.error("Login failed", err);
+            alert("Incorrect email or password");
+        }
     };
 
     return (
         <div>
             <h1>Login</h1>
-            <form onSubmit={submitHandler}>
+            <form onSubmit={login}>
                 <input
                     type="email"
                     placeholder="Email"
@@ -41,3 +48,4 @@ const Login = () => {
 };
 
 export default Login;
+
