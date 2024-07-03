@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Cart from "./Cart";
 import "./styles/ProductPage.css";
 
 const ProductPage = () => {
@@ -9,6 +10,7 @@ const ProductPage = () => {
     const [profileDropdownVisible, setProfileDropdownVisible] = useState(false);
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem("user"));
+    const cart = Cart;
 
     const addToCart = () => {
         console.log(`Adding ${quantity} of ${product.name} to cart`);
@@ -28,6 +30,10 @@ const ProductPage = () => {
         setProfileDropdownVisible(!profileDropdownVisible);
     };
 
+    const toggleCart = () => {
+       
+    };
+
     return (
         <div>
             <nav className="navbar">
@@ -35,6 +41,7 @@ const ProductPage = () => {
                     <a href="/">All Products</a>
                 </div>
                 <div className="navbar-right">
+                    <button onClick={toggleCart}>Cart</button>
                     <button onClick={toggleProfileDropdown}>Profile</button>
                     {profileDropdownVisible && (
                         <div className="profile-dropdown">
@@ -73,7 +80,7 @@ const ProductPage = () => {
                     <button
                     disabled={product.countInStock === 0}
                     onClick={addToCart}
-                    className="add-to-cart-button"
+                    className={product.countInStock === 0 ? "out-of-stock" : "add-to-cart-button"}
                 >
                     {product.countInStock === 0 ? "OUT OF STOCK" : "ADD TO CART"}
                 </button>

@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Product from "./Product";
+import Cart from "./Cart";
 import "./styles/ProductList.css";
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [profileDropdownVisible, setProfileDropdownVisible] = useState(false);
+    const cart = Cart;
     const user = JSON.parse(localStorage.getItem("user"));
     const navigate = useNavigate();
 
@@ -41,6 +43,10 @@ const ProductList = () => {
         setProfileDropdownVisible(!profileDropdownVisible);
     };
 
+    const toggleCart = () => {
+
+    };
+
     const handleProductClick = (product) => {
         navigate(`/product/${product._id}`, { state: { product } });
     };
@@ -49,9 +55,13 @@ const ProductList = () => {
         <div>
             <nav className="navbar">
                 <div className="navbar-left">
-                    <a href="/">All Products</a>
+                    <a href="/">Store</a>
+                </div>
+                <div className="navbar-middle">
+                    <a href="/">Products</a>
                 </div>
                 <div className="navbar-right">
+                    <button onClick={toggleCart}>Cart</button>
                     <button onClick={toggleProfileDropdown}>Profile</button>
                     {profileDropdownVisible && (
                         <div className="profile-dropdown">
@@ -67,7 +77,6 @@ const ProductList = () => {
                     )}
                 </div>
             </nav>
-            <h1>Products</h1>
             <div className="product-grid">
                 {products.map((product) => (
                     <div key={product._id} onClick={() => handleProductClick(product)}>

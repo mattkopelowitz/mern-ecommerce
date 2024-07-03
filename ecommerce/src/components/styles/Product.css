@@ -55,10 +55,15 @@
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    font-size: 1rem; 
+    font-size: 1rem;
+}
+
+.product-card button:hover {
+    background-color: #007600;
 }
 
 .product-card button.out-of-stock {
     background-color: grey;
     cursor: not-allowed;
+    width: 100%;
 }
