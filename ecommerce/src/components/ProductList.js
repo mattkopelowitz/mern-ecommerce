@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Product from "./Product";
+import "./styles/ProductList.css";
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
+    const [profileDropdownVisible, setProfileDropdownVisible] = useState(false);
     const user = JSON.parse(localStorage.getItem("user"));
     const navigate = useNavigate();
 
@@ -31,23 +33,53 @@ const ProductList = () => {
         navigate("/");
     };
 
+    const login = () => {
+        navigate("/login");
+    };
+
+    const toggleProfileDropdown = () => {
+        setProfileDropdownVisible(!profileDropdownVisible);
+    };
+
+    const handleProductClick = (product) => {
+        navigate(`/product/${product._id}`, { state: { product } });
+    };
+
     return (
         <div>
-            <nav>
-                <button onClick={logout}>Logout</button>
+            <nav className="navbar">
+                <div className="navbar-left">
+                    <a href="/">All Products</a>
+                </div>
+                <div className="navbar-right">
+                    <button onClick={toggleProfileDropdown}>Profile</button>
+                    {profileDropdownVisible && (
+                        <div className="profile-dropdown">
+                            <p>Profile</p>
+                            <p>Orders</p>
+                            <p>Cart</p>
+                            {user ? (
+                                <p onClick={logout}>Logout</p>
+                            ) : (
+                                <p onClick={login}>Login</p>
+                            )}
+                        </div>
+                    )}
+                </div>
             </nav>
             <h1>Products</h1>
-            <div>
+            <div className="product-grid">
                 {products.map((product) => (
-                    <Product
-                        key={product._id}
-                        name={product.name}
-                        description={product.description}
-                        price={product.price}
-                        numberInStock={product.countInStock}
-                        imageUrl={product.imageUrl}
-                        onAddToCart={() => addToCart(product)}
-                    />
+                    <div key={product._id} onClick={() => handleProductClick(product)}>
+                        <Product
+                            name={product.name}
+                            description={product.description}
+                            price={product.price}
+                            numberInStock={product.countInStock}
+                            imageUrl={product.imageUrl}
+                            onAddToCart={() => addToCart(product)}
+                        />
+                    </div>
                 ))}
             </div>
         </div>
@@ -55,4 +87,3 @@ const ProductList = () => {
 };
 
 export default ProductList;
-

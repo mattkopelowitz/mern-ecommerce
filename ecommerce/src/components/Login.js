@@ -16,6 +16,7 @@ const Login = () => {
             const data = await axios.post("http://localhost:5000/api/users/login", { email, password });
             dispatch({ type: "USER_LOGIN_SUCCESS", payload: data });
             localStorage.setItem("user", JSON.stringify({email: data.data.email}));
+            localStorage.setItem("isLoggedIn", true);
             navigate("/products");
         } catch (err) {
             console.error("Login failed", err);
