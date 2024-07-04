@@ -38,7 +38,7 @@ const ProductPage = () => {
         <div>
             <nav className="navbar">
                 <div className="navbar-left">
-                    <a href="/">All Products</a>
+                    <a href="/">Back to products</a>
                 </div>
                 <div className="navbar-right">
                     <button onClick={toggleCart}>Cart</button>
