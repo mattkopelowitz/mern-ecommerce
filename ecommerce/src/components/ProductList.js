@@ -8,9 +8,10 @@ import "./styles/ProductList.css";
 const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [profileDropdownVisible, setProfileDropdownVisible] = useState(false);
-    const cart = Cart;
     const user = JSON.parse(localStorage.getItem("user"));
     const navigate = useNavigate();
+    const [cart, setCart] = useState([]);
+    const [isCartVisible, setIsCartVisible] = useState(false);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -25,9 +26,17 @@ const ProductList = () => {
         fetchProducts();
     }, []);
 
-    const addToCart = (product) => {
-        console.log(`Adding ${product.name} to cart`);
-        // Logic to add the product to the cart goes here
+    const addToCart = (product, quantity) => {
+        setCart([...cart, { ...product, quantity }]);
+        product.numberInStock--;
+    };
+
+    const toggleCart = () => {
+        setIsCartVisible(!isCartVisible);
+    };
+
+    const closeCart = () => {
+        setIsCartVisible(false);
     };
 
     const logout = () => {
@@ -43,12 +52,13 @@ const ProductList = () => {
         setProfileDropdownVisible(!profileDropdownVisible);
     };
 
-    const toggleCart = () => {
-
-    };
-
-    const handleProductClick = (product) => {
-        navigate(`/product/${product._id}`, { state: { product } });
+    const handleProductClick = (product, event) => {
+        if (
+            event.target.tagName !== "BUTTON" &&
+            event.target.tagName !== "INPUT"
+        ) {
+            navigate(`/product/${product._id}`, { state: { product } });
+        }
     };
 
     return (
@@ -61,13 +71,13 @@ const ProductList = () => {
                     <a href="/">Products</a>
                 </div>
                 <div className="navbar-right">
-                    <button onClick={toggleCart}>Cart</button>
+                    <button onClick={toggleCart}>Cart ({cart.length})</button>
                     <button onClick={toggleProfileDropdown}>Profile</button>
                     {profileDropdownVisible && (
                         <div className="profile-dropdown">
                             <p>Profile</p>
                             <p>Orders</p>
-                            <p>Cart</p>
+                            <p onClick={toggleCart}>Cart</p>
                             {user ? (
                                 <p onClick={logout}>Logout</p>
                             ) : (
@@ -79,17 +89,23 @@ const ProductList = () => {
             </nav>
             <div className="product-grid">
                 {products.map((product) => (
-                    <div key={product._id} onClick={() => handleProductClick(product)}>
+                    <div
+                        key={product._id}
+                        onClick={(event) => handleProductClick(product, event)}
+                    >
                         <Product
                             name={product.name}
                             description={product.description}
                             price={product.price}
                             numberInStock={product.countInStock}
                             imageUrl={product.imageUrl}
-                            onAddToCart={() => addToCart(product)}
+                            onAddToCart={(quantity) => addToCart(product, quantity)}
                         />
                     </div>
                 ))}
+            </div>
+            <div className={`cart-container ${isCartVisible ? 'show' : ''}`}>
+                <Cart cart={cart} onClose={closeCart} />
             </div>
         </div>
     );

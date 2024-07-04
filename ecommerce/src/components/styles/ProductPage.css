@@ -101,17 +101,6 @@ p {
     border-radius: 4px;
 }
 
-.add-to-cart-button {
-    background-color: #eeff00;
-    color: black;
-    padding: 10px;
-    border: none;
-    width: 25%;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
 .add-to-cart-button:hover {
     background-color: green;
     color: white;
@@ -126,4 +115,32 @@ p {
     border: none;
     width: 25%;
     font-size: 16px;
+}
+
+.add-to-cart-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 100px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cart-container {
+    position: fixed;
+    top: 0;
+    right: -1000px;
+    width: 300px;
+    height: 90%;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.cart-container.show {
+    right: 0;
 }

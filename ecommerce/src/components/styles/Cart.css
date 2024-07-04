@@ -1,0 +1,75 @@
+button {
+    background-color: #eeff00;
+    color: black;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: green;
+    color: white;
+}
+
+.cart-container {
+    position: fixed;
+    top: 0;
+    right: -1000px; 
+    width: 300px;
+    height: 100%;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.cart-container.show {
+    right: 0;
+}
+
+.cart {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.cart-items {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.item-details, .item-prices p {
+    flex: 1;
+    text-align: right;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.total-price {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.close-button {
+    background-color: rgb(130, 130, 130);
+    color: white;
+    padding: 10px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.close-button:hover {
+    background-color: darkred;
+}
