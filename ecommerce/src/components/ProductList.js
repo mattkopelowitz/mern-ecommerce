@@ -3,15 +3,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Product from "./Product";
 import Cart from "./Cart";
+import Navbar from "./Navbar";
 import "./styles/ProductList.css";
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
-    const [profileDropdownVisible, setProfileDropdownVisible] = useState(false);
-    const user = JSON.parse(localStorage.getItem("user"));
-    const navigate = useNavigate();
     const [cart, setCart] = useState([]);
     const [isCartVisible, setIsCartVisible] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -28,7 +27,6 @@ const ProductList = () => {
 
     const addToCart = (product, quantity) => {
         setCart([...cart, { ...product, quantity }]);
-        product.numberInStock--;
     };
 
     const toggleCart = () => {
@@ -39,60 +37,18 @@ const ProductList = () => {
         setIsCartVisible(false);
     };
 
-    const logout = () => {
-        localStorage.removeItem("user");
-        navigate("/");
-    };
-
-    const login = () => {
-        navigate("/login");
-    };
-
-    const toggleProfileDropdown = () => {
-        setProfileDropdownVisible(!profileDropdownVisible);
-    };
-
     const handleProductClick = (product, event) => {
-        if (
-            event.target.tagName !== "BUTTON" &&
-            event.target.tagName !== "INPUT"
-        ) {
+        if (event.target.tagName !== "BUTTON" && event.target.tagName !== "INPUT") {
             navigate(`/product/${product._id}`, { state: { product } });
         }
     };
 
     return (
         <div>
-            <nav className="navbar">
-                <div className="navbar-left">
-                    <a href="/">Store</a>
-                </div>
-                <div className="navbar-middle">
-                    <a href="/">Products</a>
-                </div>
-                <div className="navbar-right">
-                    <button onClick={toggleCart}>Cart ({cart.length})</button>
-                    <button onClick={toggleProfileDropdown}>Profile</button>
-                    {profileDropdownVisible && (
-                        <div className="profile-dropdown">
-                            <p>Profile</p>
-                            <p>Orders</p>
-                            <p onClick={toggleCart}>Cart</p>
-                            {user ? (
-                                <p onClick={logout}>Logout</p>
-                            ) : (
-                                <p onClick={login}>Login</p>
-                            )}
-                        </div>
-                    )}
-                </div>
-            </nav>
+            <Navbar cart={cart} toggleCart={toggleCart} isCartVisible={isCartVisible} />
             <div className="product-grid">
                 {products.map((product) => (
-                    <div
-                        key={product._id}
-                        onClick={(event) => handleProductClick(product, event)}
-                    >
+                    <div key={product._id} onClick={(event) => handleProductClick(product, event)}>
                         <Product
                             name={product.name}
                             description={product.description}

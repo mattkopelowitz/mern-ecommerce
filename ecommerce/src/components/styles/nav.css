@@ -1,0 +1,84 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.navbar-left a {
+    text-decoration: none;
+    color: #333;
+    font-size: 22px;
+}
+
+.navbar-middle a {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    color: #333;
+}
+
+.navbar-middle a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+.navbar-right {
+    position: relative;
+}
+
+.navbar-right button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+}
+
+.profile-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.profile-dropdown p {
+    margin: 0.5rem 0;
+    cursor: pointer;
+}
+
+.profile-dropdown p:hover {
+    text-decoration: underline;
+}
+
+.navbar-right button:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    gap: 20px;
+}
+
+.icon-container svg {
+    height: 25px;
+    width: auto; 
+    color: white;
+    cursor: pointer;
+}
+
+
+.icon-container svg:last-child {
+    margin-right: 0;
+}

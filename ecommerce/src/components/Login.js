@@ -44,6 +44,7 @@ const Login = () => {
                 <br />
                 <button type="submit">Login</button>
             </form>
+            <a href="/register">Don't have an account?</a>
         </div>
     );
 };

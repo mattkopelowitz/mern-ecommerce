@@ -27,7 +27,9 @@ const Cart = ({ cart, onClose }) => {
             <div className="total-price">
                 <p>Total Price: ${totalPrice}</p>
             </div>
-            <button>Checkout</button>
+            <div className="checkout">
+                <button className="checkout-button">Checkout</button>
+            </div>
         </div>
     );
 };
