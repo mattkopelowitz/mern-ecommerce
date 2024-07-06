@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./styles/Auth.css";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -25,26 +26,28 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={login}>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />{" "}
-                <br />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />{" "}
-                <br />
-                <button type="submit">Login</button>
-            </form>
-            <a href="/register">Don't have an account?</a>
+        <div className="container">
+            <div className="card">
+                <h1>Login</h1>
+                <form onSubmit={login}>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />{" "}
+                    <br />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />{" "}
+                    <br />
+                    <button type="submit">Login</button>
+                </form>
+                <a href="/register">Don't have an account?</a>
+            </div>
         </div>
     );
 };

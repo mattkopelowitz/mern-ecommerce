@@ -13,6 +13,7 @@ const ProductPage = () => {
 
     const addToCart = (product, quantity) => {
         setCart([...cart, { ...product, quantity }]);
+        product.countInStock -= quantity;
     };
 
     const toggleCart = () => {
