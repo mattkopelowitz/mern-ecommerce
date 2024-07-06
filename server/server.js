@@ -13,7 +13,13 @@ connectDB();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors(
+    {
+        origin: ["https://mern-ecommerce-backend-tan.vercel.app"],
+        methods: ["POST", "GET"],
+        credentials: true
+    }
+));
 
 // Routes
 app.use("/api/users", userRoutes);
