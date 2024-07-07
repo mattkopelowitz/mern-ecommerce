@@ -46,6 +46,7 @@ const ProductList = () => {
 
     return (
         <div>
+            <title>Ecommerce App</title>
             <Navbar cart={cart} toggleCart={toggleCart} isCartVisible={isCartVisible} />
             <div className="product-grid">
                 {products.map((product) => (
