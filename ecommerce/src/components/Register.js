@@ -12,7 +12,7 @@ const Register = () => {
     const register = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:5000/api/users/register", { email, password });
+            await axios.post("https://mern-ecommerce-backend-tan.vercel.app/api/users/register", { email, password });
             navigate("/login");
         } catch (err) {
             console.error("Registration failed", err);
