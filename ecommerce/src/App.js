@@ -12,7 +12,6 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <div>
-        <title>Ecommerce App</title>
           <Routes>
             <Route path="/" element={<ProductList></ProductList>} exact/>
             <Route path="/login" element={<Login></Login>} exact/>
